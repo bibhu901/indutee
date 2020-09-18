@@ -1,5 +1,7 @@
 
 import random
+# a pattern for displaying the board.
+
 def display_board(board):
     pattern={'a':'        |      |','b':'    {}   |  {}   |   {}   '.format(board[7],board[8],board[9]),'c':'------------------------','d':'    {}   |  {}   |   {}   '.format(board[4],board[5],board[6]),'e':'    {}   |  {}   |   {}   '.format(board[1],board[2],board[3])}
     figure={'f':['a','b','a','c','a','d','a','c','a','e','a']}
@@ -15,9 +17,13 @@ def player_input():
     else:
         return ('O','X')
         
+# A function that takes in the board list object, a marker ('X' or 'O'), and a desired position (number 1-9) and assigns it to the board.        
+
 def place_marker(board, marker, position):
     board[position]=marker   
     
+# To check if the player won, using all possible patterns in which player wins.
+
 def win_check(board, mark):
     return board[7]==board[8]==board[9]==mark or board[4]==board[5]==board[6]==mark or board[1]==board[2]==board[3]==mark or board[7]==board[4]==board[1]==mark or board[8]==board[5]==board[2]==mark or board[9]==board[6]==board[3]==mark or board[1]==board[5]==board[9]==mark or board[7]==board[5]==board[3]==mark
  
@@ -47,6 +53,8 @@ def replay():
     ask=input('Do you want to play again?? Y or N : ')
     return ask.upper()== 'Y'
     
+# the game below.
+
 print('Welcome to Tic Tac Toe!')
 
 while True:
@@ -61,17 +69,17 @@ while True:
         game_on=True
     else:
         game_on = False
-    
-    # Set the game up here
-    #pass
 
     while game_on:
          #Player 1 Turn
+         # the board will be displayed and then marker will be placed in the position the player choses.
         if turn == 'Player 1':            
             display_board(theboard)
             print('player 1 turn')
             position = player_choice(theboard)
             place_marker(theboard, p1_marker, position)
+            
+            # After each turn it will check if the player won, or its a draw , if neither turn will be changed to player 2.
             
             if win_check(theboard,p1_marker):
                 display_board(theboard)
@@ -89,6 +97,7 @@ while True:
        
         else:
             # Player2's turn.
+            
             display_board(theboard)
             print('player 2 turn')
             position = player_choice(theboard)
@@ -107,9 +116,6 @@ while True:
                 else:
                     turn ='Player 1'
                     print('\n'*100)
-        
-            
-    #pass
 
     if not replay():
         break    
